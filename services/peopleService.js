@@ -33,10 +33,24 @@ const deletePeopleById = (req, res) => {
   res.status(200).json({status: 'error', message: 'Data deleted', data: data})
 }
 
+const renderPeople = (req, res) => { 
+  const { id } = req.params
+
+  // res.render('index', { name: "cekson" })
+  res.render('index', data.find((row) => row.id === +id))
+}
+
+const uploadImagePeople = (req, res) => { 
+  const url = `/uploads/${req.file.filename}`
+
+  res.status(200).json({message: 'Uploaded', url})
+}
 
 module.exports = {
   getPeople,
   getPeopleById,
   addPeople,
-  deletePeopleById
+  deletePeopleById,
+  renderPeople,
+  uploadImagePeople
 }
